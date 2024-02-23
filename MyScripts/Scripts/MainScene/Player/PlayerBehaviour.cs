@@ -92,6 +92,12 @@ namespace PullAnimals
         public void StopPlayer()
         {
             _stateMachine.StopPlayer();
+            _handController.ChangeCanPull(false);
+        }
+
+        public void ChangePlayerPull(bool canPull)
+        {
+            _handController.ChangeCanPull(canPull);
         }
     }
 }

@@ -79,7 +79,6 @@ namespace PullAnimals
         /// </summary>
         public TargetRabbitUIController RabbitUIController => _targetRabbitUIController;
 
-
         /// <summary>
         /// コンストラクター
         /// </summary>

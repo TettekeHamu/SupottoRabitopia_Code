@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -42,6 +41,7 @@ namespace PullAnimals
             _addScoreText.text = "ぷらす" + addScore.ToString() + "てん！";
             yield return _addScoreText.transform
                 .DOMoveY(_addScorePos.y + 40, 1f)
+                .SetLink(gameObject)
                 .WaitForCompletion();
             _addScoreText.gameObject.SetActive(false);
         }

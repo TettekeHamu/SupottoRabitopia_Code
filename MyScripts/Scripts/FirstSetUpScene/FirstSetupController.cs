@@ -12,7 +12,7 @@ namespace PullAnimals
         {
             //すぐタイトルシーンに遷移させる
             //Awake()だと何故かビルド時動かないのでStart()で実行する
-            SceneLoadController.Instance.FlashLoadScene("TitleSceneVer1.0");
+            SceneLoadController.Instance.FlashLoadScene(SceneNameContainer.Title);
         }
     }
 }

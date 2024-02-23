@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using PullAnimals.StatePattern;
@@ -39,6 +40,10 @@ namespace PullAnimals
         /// </summary>
         private Vector3 _rabbitSize;
         /// <summary>
+        /// 引っこ抜かれたかどうか
+        /// </summary>
+        private bool _isPulled;
+        /// <summary>
         /// アニマルのStateを管理するクラス
         /// </summary>
         private RabbitStateMachine _stateMachine;
@@ -56,6 +61,7 @@ namespace PullAnimals
             yield return DOTween.Sequence()
                 .Append(transform.DOLocalMoveY(10f, 1f))
                 .Join(transform.DORotate(new Vector3(0, 360, 0), 1f, RotateMode.FastBeyond360))
+                .SetLink(gameObject)
                 .WaitForCompletion();
 
             _destroyer.DestroyRabbit();
@@ -69,6 +75,7 @@ namespace PullAnimals
 
         void ISetHand.ReleaseHand()
         {
+            _isPulled = true;
             //スコアコントローラに自分が抜かれたことを通知
             var score = FindObjectOfType<PulledRabbitNumberController>();
             score.AddCount(_stateMachine, _status);
@@ -80,6 +87,11 @@ namespace PullAnimals
 
         RabbitBehaviour ISelected.SelectAnimal()
         {
+            if (_isPulled)
+            {
+                return null;
+            }
+            
             return this;
         }
 
@@ -111,6 +123,7 @@ namespace PullAnimals
         /// </summary>
         public void Initialize(int[] time)
         {
+            _isPulled = false;
             _rabbitSize = transform.localScale;
             _remainTimeController.SetRemainTime(time);
             _stateMachine = new RabbitStateMachine(_viewController, _pullController, _destroyer, _remainTimeController, _particleController);

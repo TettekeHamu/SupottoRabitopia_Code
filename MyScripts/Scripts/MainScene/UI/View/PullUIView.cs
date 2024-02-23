@@ -12,10 +12,20 @@ namespace PullAnimals
         /// 引っこ抜く際に表示するUI
         /// </summary>
         [SerializeField] private Text _pullText;
-
+        /// <summary>
+        /// 引っこ抜く際に表示する画像
+        /// </summary>
+        [SerializeField] private Image _pullImageRed;
+        /// <summary>
+        /// 引っこ抜く際に表示する画像
+        /// </summary>
+        [SerializeField] private Image _pullImageBlue;
+ 
         private void Awake()
         {
             _pullText.gameObject.SetActive(false);
+            _pullImageRed.gameObject.SetActive(false);
+            _pullImageBlue.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -25,6 +35,8 @@ namespace PullAnimals
         public void ChangePullText(bool canView)
         {
             _pullText.gameObject.SetActive(canView);
+            _pullImageRed.gameObject.SetActive(canView);
+            _pullImageBlue.gameObject.SetActive(canView);
         }
     }
 }

@@ -25,7 +25,8 @@ namespace PullAnimals
             var startScale = transform.localScale;
             var sequence = DOTween.Sequence();
             sequence.Append(transform.DOScale(startScale * 1.5f, 0.05f))
-                .Append(transform.DOScale(startScale, 0.05f));
+                .Append(transform.DOScale(startScale, 0.05f))
+                .SetLink(gameObject);
         }
     }
 }

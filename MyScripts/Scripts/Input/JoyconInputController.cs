@@ -39,13 +39,25 @@ namespace PullAnimals
         /// </summary>
         public bool IsZrKeyDown => (_joyconR?.GetButtonDown(Joycon.Button.SHOULDER_2)).GetValueOrDefault() || (_joyconL?.GetButtonDown(Joycon.Button.SHOULDER_2)).GetValueOrDefault();
         /// <summary>
+        /// Zrの押しっぱなしの入力を返す
+        /// </summary>
+        public bool IsZrKey => (_joyconR?.GetButton(Joycon.Button.SHOULDER_2)).GetValueOrDefault() || (_joyconL?.GetButton(Joycon.Button.SHOULDER_2)).GetValueOrDefault();
+        /// <summary>
         /// 上ボタンの入力を返す
         /// </summary>
         public bool IsUpKeyDown => (_joyconR?.GetButtonDown(Joycon.Button.DPAD_UP)).GetValueOrDefault() || (_joyconL?.GetButtonDown(Joycon.Button.DPAD_UP)).GetValueOrDefault();
         /// <summary>
+        /// 上ボタンの押しっぱなしの入力を返す
+        /// </summary>
+        public bool IsUpKey =>(_joyconR?.GetButton(Joycon.Button.DPAD_UP)).GetValueOrDefault() || (_joyconL?.GetButton(Joycon.Button.DPAD_UP)).GetValueOrDefault();
+        /// <summary>
         /// 右ボタンの入力を返す
         /// </summary>
         public bool IsRightKeyDown => (_joyconR?.GetButtonDown(Joycon.Button.DPAD_RIGHT)).GetValueOrDefault() || (_joyconL?.GetButtonDown(Joycon.Button.DPAD_RIGHT)).GetValueOrDefault();
+        /// <summary>
+        /// 右ボタンの押しっぱなしの入力を返す
+        /// </summary>
+        public bool IsRightKey => (_joyconR?.GetButton(Joycon.Button.DPAD_RIGHT)).GetValueOrDefault() || (_joyconL?.GetButton(Joycon.Button.DPAD_RIGHT)).GetValueOrDefault();
         /// <summary>
         /// 下ボタンの入力を返す
         /// </summary>

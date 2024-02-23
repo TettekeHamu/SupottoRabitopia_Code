@@ -66,11 +66,14 @@ namespace PullAnimals
                                 await UniTask.Yield();
                                 speed = MyInputController.Instance.GetJoyconSwingSpeed();
                             };
-
-                            //カウントを増加
-                            _pullCount++;
-                            //ウサギを引き延ばす
-                            _componentsBundle.HandController.PullRabbit(_pullCount, status.ShakeCount);
+                            
+                            if (_componentsBundle.HandController.CanPullRabbit)
+                            {
+                                //カウントを増加
+                                _pullCount++;
+                                //ウサギを引き延ばす
+                                _componentsBundle.HandController.PullRabbit(_pullCount, status.ShakeCount);
+                            }
                 
                             //振るスピードが一定以下になるまで待つ
                             //連続で振ったことにならないようにするため
@@ -90,10 +93,14 @@ namespace PullAnimals
                             if (MyInputController.Instance.GetHandActionKeyDown())
                             {
                                 SePlayer.Instance.Play("SE_Pulling");
-                                //カウントを増加
-                                _pullCount++;
-                                //ウサギを引き延ばす
-                                _componentsBundle.HandController.PullRabbit(_pullCount, status.MashCount);
+                                
+                                if (_componentsBundle.HandController.CanPullRabbit)
+                                {
+                                    //カウントを増加
+                                    _pullCount++;
+                                    //ウサギを引き延ばす
+                                    _componentsBundle.HandController.PullRabbit(_pullCount, status.ShakeCount);
+                                }
                             }
                 
                             await UniTask.Yield();

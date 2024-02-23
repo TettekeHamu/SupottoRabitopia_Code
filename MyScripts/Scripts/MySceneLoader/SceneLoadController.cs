@@ -78,6 +78,7 @@ namespace PullAnimals.SceneLoader
             yield return _fadeImage.rectTransform
                 .DOMoveX(1920 / 2f, animationTime)
                 .SetEase(Ease.OutSine)
+                .SetLink(gameObject)
                 .WaitForCompletion();
         }
 
@@ -91,6 +92,7 @@ namespace PullAnimals.SceneLoader
             yield return _fadeImage.rectTransform
                 .DOMoveX(0, animationTime)
                 .SetEase(Ease.InSine)
+                .SetLink(gameObject)
                 .WaitForCompletion();
             //キャンバスをオフにする
             _canvas.gameObject.SetActive(false);

@@ -23,6 +23,10 @@ namespace PullAnimals
         /// </summary>
         [SerializeField] private HandObject _handObject;
         /// <summary>
+        /// ウサギを引っこ抜けるかどうかのフラグ（ポーズ中に引っこ抜くのを防止するため）
+        /// </summary>
+        private bool _canPullRabbit;
+        /// <summary>
         /// ウサギを引っこ抜くときに発効するSubject
         /// </summary>
         private readonly Subject<bool> _onPullingRabbitSubject = new Subject<bool>();
@@ -35,6 +39,10 @@ namespace PullAnimals
         /// </summary>
         public JoyconSwingData SwingData => _joyconSwingData;
         /// <summary>
+        /// ウサギを引っこ抜けるかどうかのフラグ（ポーズ中に引っこ抜くのを防止するため）
+        /// </summary>
+        public bool CanPullRabbit => _canPullRabbit;
+        /// <summary>
         /// 運んでいる動物
         /// </summary>
         public RabbitBehaviour CarryingRabbit => _carryingRabbit;
@@ -42,6 +50,11 @@ namespace PullAnimals
         /// ウサギを引っこ抜くときに発効するSubjectのObservable
         /// </summary>
         public IObservable<bool> OnPullingRabbitObservable => _onPullingRabbitSubject;
+
+        private void Awake()
+        {
+            _canPullRabbit = true;
+        }
 
         /// <summary>
         /// 引っこ抜き始めた際にウサギの方に向けるコルーチン
@@ -88,6 +101,15 @@ namespace PullAnimals
         }
 
         /// <summary>
+        /// ウサギを引っこ抜ける・抜けないを切り替える処理
+        /// </summary>
+        /// <param name="canPull">trueなら引っこ抜けるようにする</param>
+        public void ChangeCanPull(bool canPull)
+        {
+            _canPullRabbit = canPull;
+        }
+
+        /// <summary>
         /// ウサギをを引っこ抜き始めたときの処理
         /// </summary>
         public void StartPulling(bool isFever)
@@ -95,6 +117,10 @@ namespace PullAnimals
             StartCoroutine(LookRabbitCoroutine(_carryingRabbit.transform.position));
             ITakePulled pullingRabbit = _carryingRabbit;
             pullingRabbit.StartPulling();
+            
+            //操作説明を非表示に
+            _pullRangeObject.ChangePulling(true);
+            _pullRangeObject.HideUI();
             
             //Fever中ならUIを表示しない
             if(isFever) return;
@@ -133,6 +159,7 @@ namespace PullAnimals
         /// </summary>
         public void ThrowRabbit()
         {
+            _pullRangeObject.ChangePulling(false);
             _onPullingRabbitSubject.OnNext(false);
             //親子関係を無くす & 上方向に投げる
             ISetHand setHand = _carryingRabbit;

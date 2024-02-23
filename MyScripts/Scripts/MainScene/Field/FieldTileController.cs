@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using DG.Tweening;
 using UniRx;
 using UnityEngine;
@@ -46,7 +44,8 @@ namespace PullAnimals
             var startScale = _holeObject.transform.localScale;
             var sequence = DOTween.Sequence();
             sequence.Append(_holeObject.transform.DOScale(startScale * 1.25f, 0.05f))
-                .Append(_holeObject.transform.DOScale(startScale, 0.05f));
+                .Append(_holeObject.transform.DOScale(startScale, 0.05f))
+                .SetLink(gameObject);
         }
 
         /// <summary>

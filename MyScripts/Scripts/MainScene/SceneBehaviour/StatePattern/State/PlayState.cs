@@ -39,7 +39,7 @@ namespace PullAnimals
             BgmPlayer.Instance.Play("BGM_Main");
             BgmPlayer.Instance.ChangeVolume(0.5f);
             BeatController.Instance.StartPlaying();
-            _fieldController.Initialize();
+            _player.ChangePlayerPull(true);
         }
 
         void IState.MyUpdate()
@@ -67,7 +67,7 @@ namespace PullAnimals
 
         void IState.Exit()
         {
-            
+            _player.ChangePlayerPull(false);
         }
         
         /// <summary>
@@ -79,6 +79,7 @@ namespace PullAnimals
             _player = player;
             _gameTimeController = gtc;
             _fieldController = fc;
+            _fieldController.Initialize();
         }
     }
 }

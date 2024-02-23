@@ -12,7 +12,7 @@ namespace PullAnimals
         /// <summary>
         /// メイン
         /// </summary>
-        public static readonly string Main = "MainSceneVer2.0";
+        public static readonly string Main = "MainSceneVer3.0";
         /// <summary>
         /// エンディング
         /// </summary>

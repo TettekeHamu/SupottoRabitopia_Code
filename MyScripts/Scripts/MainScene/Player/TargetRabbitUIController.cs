@@ -17,6 +17,10 @@ namespace PullAnimals
         /// </summary>
         [SerializeField] private Image _arrowImage;
         /// <summary>
+        /// 矢印の中の画像
+        /// </summary>
+        [SerializeField] private Image _arrowInImage;
+        /// <summary>
         /// 画面外にいてなおかつ一番近いウサギ
         /// </summary>
         private RabbitPullController _targetRabbit;
@@ -29,6 +33,7 @@ namespace PullAnimals
         {
             _mainCamera = Camera.main;
             _arrowImage.enabled = false;
+            _arrowInImage.enabled = false;
         }
 
         /// <summary>
@@ -45,6 +50,7 @@ namespace PullAnimals
             if (filteredRabbits.Length == 0)
             {
                 _arrowImage.enabled = false;
+                _arrowInImage.enabled = false;
                 return;
             }
             
@@ -86,6 +92,7 @@ namespace PullAnimals
 
             var isOffScreen = (pos.z < 0f || d > 1f);
             _arrowImage.enabled = isOffScreen;
+            _arrowInImage.enabled = isOffScreen;
             
             //画面内にウサギがいるならreturn
             if(!isOffScreen) return;
@@ -94,6 +101,7 @@ namespace PullAnimals
             pos.x /= d;
             pos.y /= d;
             _arrowImage.rectTransform.anchoredPosition = pos / canvasScale;
+            _arrowInImage.rectTransform.anchoredPosition = pos / canvasScale;
             
             _arrowImage.rectTransform.eulerAngles = new Vector3
             (

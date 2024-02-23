@@ -54,7 +54,7 @@ namespace PullAnimals
             if(JoyconInputController.Instance.IsConnectingJoycon)
             {
                 //ボタン全押しにする
-                return JoyconInputController.Instance.IsUpKeyDown && JoyconInputController.Instance.IsRightKeyDown;
+                return JoyconInputController.Instance.IsUpKey && JoyconInputController.Instance.IsRightKey;
             }
             else
             {
