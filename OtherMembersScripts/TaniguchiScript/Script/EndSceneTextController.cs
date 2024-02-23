@@ -228,7 +228,6 @@ namespace PullAnimals
             _normalRabbitNumText.gameObject.SetActive(false);
             _silverRabbitNumText.gameObject.SetActive(false);
             _goldRabbitNumText.gameObject.SetActive(false);
-            //_totalScoreNumText.gameObject.SetActive(false);
             _changeText.gameObject.SetActive(false);
             _normalRabbitNumImage.gameObject.SetActive(false);
             _silverRabbitNumImage.gameObject.SetActive(false);

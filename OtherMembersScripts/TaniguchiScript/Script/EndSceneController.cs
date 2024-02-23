@@ -27,7 +27,7 @@ namespace PullAnimals
             {
                 BgmPlayer.Instance.Pause();
                 _isChangingScene = true;
-                SceneLoadController.Instance.LoadNextScene("TitleSceneVer1.0");
+                SceneLoadController.Instance.LoadNextScene(SceneNameContainer.Title);
             }
         }
 

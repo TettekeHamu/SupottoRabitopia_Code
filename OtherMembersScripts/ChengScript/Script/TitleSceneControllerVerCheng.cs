@@ -1,3 +1,4 @@
+using System.Threading;
 using PullAnimals.SceneLoader;
 using UnityEngine;
 
@@ -24,20 +25,21 @@ namespace PullAnimals
         [SerializeField] private float _bgmVolume;
 
         /// <summary>
-        /// 動作確認(開発用)
-        /// </summary>
-        //[SerializeField] private bool _test_action = false;
-
-        /// <summary>
         /// シーンを遷移中かどうか
         /// </summary>
         private bool _isChangingScene;
+
+        /// <summary>
+        /// キャンセル用のトークン
+        /// </summary>
+        private CancellationToken _token;
 
         private void Start()
         {
             _canvasController.SetTitleImage();
             BgmPlayer.Instance.Play("BGM_Title");
             BgmPlayer.Instance.ChangeVolume(0.5f);
+            _token = destroyCancellationToken;
         }
 
         private void Update()
@@ -64,12 +66,13 @@ namespace PullAnimals
 
             if (TitleInputController.Instance.GetChangeSceneKeyDown() && !_isChangingScene)
             {
+                TitleInputController.Instance.AsyncShakeController(0.2f, 0.2f, 0.2f, 100, _token).Forget();
                 SePlayer.Instance.Play("SE_Decide");
                 _isChangingScene = true;
                 //_canvasController.gameObject.SetActive(true);
                 BgmPlayer.Instance.Stop();
                 
-                SceneLoadController.Instance.LoadNextScene("MainSceneVer3.0");
+                SceneLoadController.Instance.LoadNextScene(SceneNameContainer.Main);
             }
         }
 

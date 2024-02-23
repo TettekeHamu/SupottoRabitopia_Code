@@ -5,11 +5,29 @@ namespace PullAnimals
 {
     public class HighScoreTextController : MonoBehaviour
     {
+        /// <summary>
+        /// メインシーンのトータルスコアをもらう変数
+        /// </summary>
         private int _totalScore;
+        /// <summary>
+        /// 現在のランクの表示するための変数
+        /// </summary>
         private int _nowRank;
+        /// <summary>
+        /// ランキングの幅
+        /// </summary>
         [SerializeField]private string[] _ranking = {};
+        /// <summary>
+        /// トータルスコアの値を格納する変数
+        /// </summary>
         private int[] _rankingValue = new int[50];
+        /// <summary>
+        /// 一位から三位までを表示するtext
+        /// </summary>
         [SerializeField] private Text[] _rankingText = new Text[3];
+        /// <summary>
+        /// 自分の順位を表示するtext
+        /// </summary>
         [SerializeField] private Text _myRankText;
 
         // Start is called before the first frame update

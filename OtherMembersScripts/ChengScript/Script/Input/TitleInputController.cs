@@ -26,7 +26,7 @@ namespace PullAnimals
             //joyconと接続中ならJoycon、なければInputSystemの入力を返す
             if(JoyconInputController.Instance.IsConnectingJoycon)
             {
-                return JoyconInputController.Instance.IsZrKeyDown;
+                return JoyconInputController.Instance.IsZrKey && (JoyconInputController.Instance.GetJoyconSwingSpeed() >= 4);
             }
             else
             {
@@ -65,6 +65,33 @@ namespace PullAnimals
             else
             {
                 return _playerInput.actions["ShowResource"].WasPressedThisFrame();
+            }
+        }
+        
+        /// <summary>
+        /// コントローラを揺らす処理
+        /// </summary>
+        /// <param name="padStrength">パッドを揺らす強さ</param>
+        /// <param name="padTime">パッドを揺らす時間</param>
+        /// <param name="joyconStrength">Joyconを揺らす強さ</param>
+        /// <param name="joyconTime">Joyconを揺らす時間(msなので注意)</param>
+        /// <param name="token"></param>
+        public async UniTaskVoid AsyncShakeController(float padStrength, float padTime, float joyconStrength, int joyconTime, CancellationToken token)
+        {
+            //Joycon用の振動
+            if (JoyconInputController.Instance.IsConnectingJoycon)
+            {
+                JoyconInputController.Instance.ShakeJoycon(joyconStrength, joyconTime);
+                return;
+            }
+            
+            //ゲームパッド用の振動
+            var gamepad = Gamepad.current;
+            if (gamepad != null)
+            {
+                gamepad.SetMotorSpeeds(padStrength, padStrength);
+                await UniTask.Delay(TimeSpan.FromSeconds(padTime), cancellationToken: token);
+                gamepad.SetMotorSpeeds(0.0f, 0.0f);   
             }
         }
     }
